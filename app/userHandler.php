@@ -27,7 +27,7 @@ function tryUserLogin(string $user, string $pass) {
     return "'$user' NO EXISTE";
   }
   // TODO encode passwd
-  if (!$pass == $userObj['passwd']) {
+  if ($pass !== $userObj['passwd']) {
     return "CONTRASENA INCORRECTA";
   }
 

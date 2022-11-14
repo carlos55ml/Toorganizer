@@ -1,6 +1,6 @@
 <?php
 class DB {
-  static private $mysqlConnectionString = "mysql:dbname=miappweb;host=127.0.0.1;charset=utf8mb4";
+  static private $mysqlConnectionString = "mysql:dbname=toorganizer;host=127.0.0.1;charset=utf8mb4";
   static private $mysqlUser = "root";
   static private $mysqlPass = "";
   static private $dbo = null;

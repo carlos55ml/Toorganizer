@@ -40,8 +40,8 @@ CREATE TABLE IF NOT EXISTS `events` (
   `event_id` int(11) NOT NULL AUTO_INCREMENT,
   `NAME` varchar(100) DEFAULT NULL,
   `game` varchar(100) DEFAULT NULL,
-  `logo_url` varchar(100) DEFAULT NULL,
-  `state` enum('pending','running','finished','canceled') DEFAULT NULL,
+  `logo_url` varchar(100) DEFAULT 'https://i.imgur.com/0hTFTZf.png',
+  `state` enum('pending','running','finished','canceled') DEFAULT 'pending',
   PRIMARY KEY (`event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -98,10 +98,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(25) DEFAULT NULL,
   `passwd` varchar(255) DEFAULT NULL,
-  `isAdmin` tinyint(1) DEFAULT NULL,
-  `avatar_url` varchar(255) DEFAULT NULL,
+  `isAdmin` tinyint(1) DEFAULT 0,
+  `avatar_url` varchar(255) DEFAULT 'https://i.imgur.com/qF8tRFr.png',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
 

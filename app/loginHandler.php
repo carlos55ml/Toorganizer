@@ -1,5 +1,5 @@
 <?php
- include __DIR__.'/userHandler.php';
+ include __DIR__ . '/userHandler.php';
 
 /**
  * recibe un post y un get.

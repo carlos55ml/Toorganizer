@@ -10,5 +10,15 @@
   <h1>Login</h1>
   <!-- TODO pagina login -->
   <!-- POST a loginHandler.php (revisar para nombre campos) -->
+  <form action="./app/loginHandler.php?isLogin=true" method="post" id="loginForm">
+    <label for="usernameLogin">Nombre de usuario: </label>
+    <input type="text" name="usernameLogin" id="usernameLogin">
+    <br>
+    <label for="passwordLogin">Contraseña: </label>
+    <input type="password" name="passwordLogin" id="passwordLogin">
+    <br>
+    <input type="submit" value="Inicia Sesion" id="btnLogin">
+    <button id="btnToRegister" type="button">Registrate</button>
+  </form>
 </body>
 </html>

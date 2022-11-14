@@ -19,20 +19,17 @@ function fetchUser(string $user) {
  * This will return true if user exist and password is correct, false otherwise.
  * @param string $user Username.
  * @param string $pass Password.
- * @return bool True if succesfully logged.
+ * @return mixed True if succesfully logged, Error string if error
  */
 function tryUserLogin(string $user, string $pass) {
   $userObj = fetchUser($user);
   if (!$userObj) {
-    echo "Usuario NO EXISTE";
-    return false;
+    return "'$user' NO EXISTE";
   }
   // TODO encode passwd
-  if (!$pass == $userObj['password']) {
-    echo "Contrasena incorrecta";
-    return false;
+  if (!$pass == $userObj['passwd']) {
+    return "CONTRASENA INCORRECTA";
   }
-  echo "Exito login";
 
   return true;
 }

@@ -10,7 +10,20 @@
   <?php
   // TODO check sesion
   // Revisar si hay sesion activa, si no, redirige a LOGIN.HTML
+  session_start();
+  $user = isset($_SESSION['user'])?$_SESSION['user']:null;
   ?>
   <h1>Inicio</h1>
+  <?php
+  if ($user) {
+    echo "bienvenido $user";
+  } else {
+    header("Location:login.html");
+  }
+  ?>
+  
+  <form action="./app/loginHandler.php?logout=true" method="post">
+    <input type="submit" value="Cerrar Sesion">
+  </form>
 </body>
 </html>

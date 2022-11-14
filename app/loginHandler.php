@@ -27,7 +27,7 @@ if ($isLogin) {
     // TODO pulir sesion
 
     session_start();
-    $_SESSION['user'] = $userName;
+    $_SESSION['user'] = fetchUser($userName)['username'];
     
     header("Location:../index.php");
   } else {

@@ -1,18 +1,38 @@
 :root {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma;
+    --third-color: red;
 }
 
 /*** Header ***/
+.whitebold,
+nav>a,
+#username {
+    color: white;
+    font-weight: bold;
+}
+
 #userBox {
     position: absolute;
-    top:25px;
+    top: 25px;
     left: 50px;
 }
 
 #imgUser {
+    height: 50px;
     width: 50px;
+
+    /* Redondear foto */
     border: 2px solid white;
     border-radius: 50%;
+    object-fit: cover;
+}
+
+#username {
+    position: inherit;
+
+    top: -27px;
+    left: 70px;
+    font-size: 2em;
 }
 
 .imgHeader {
@@ -20,9 +40,7 @@
     height: 100px;
     margin: -8px -8px 0px -8px;
 
-    color: white;
     font-size: 2.5em;
-    font-weight: bold;
 
     /* Centrar texto vertical y horizontalmente */
     text-align: center;
@@ -34,21 +52,47 @@ nav a {
     text-decoration: none;
     padding: 12px 12px;
     display: inline-block;
-    color: black;
     transition: 0.3s;
 }
 
 nav a:hover {
     background-color: black;
-    color: goldenrod;
+    color: var(--third-color);
     transition: 0.3s;
 }
 
 nav {
     text-align: center;
-    background-color: goldenrod;
+    background-color: var(--third-color);
     margin: 0px -8px;
 }
 
 /*** Formulario ***/
-.userForm {}
+.userForm {
+    margin: 0 auto;
+    align-items: center;
+    width: 500px;
+}
+
+input,
+button {
+    padding: 5px;
+    margin: 5px;
+}
+
+.userForm>h1 {
+    text-align: center;
+}
+
+.col-30 {
+    display: inline-block;
+    width: 30%;
+}
+
+.col-60 {
+    width: 60%;
+}
+
+.center {
+    text-align: center;
+}

@@ -1,5 +1,6 @@
 <?php
 include __DIR__ . '/userHandler.php';
+include __DIR__ . '/image.php';
 
 /**
  * recibe un post y un get.
@@ -30,7 +31,7 @@ if ($isRegister) {
   $userName = isset($_POST['usernameRegister']) ? $_POST['usernameRegister'] : null;
   $passwordRegister = isset($_POST['passwordRegister']) ? $_POST['passwordRegister'] : null;
   $confirmPasswordRegister = isset($_POST['confirmPasswordRegister']) ? $_POST['confirmPasswordRegister'] : null;
-  $imgFile = isset($_POST['imgFile']) ? $_POST['imgFile'] : null;
+  //$imgFile = isset($_POST['imgFile']) ? $_POST['imgFile'] : null;
 
   // Si el usuario no existe, añadirlo a la BBDD.
   if (!fetchUser($userName)) {
@@ -41,11 +42,18 @@ if ($isRegister) {
       return;
     }
 
-    // TODO subir imagen a imgur
-    $query = DB::preparedQuery(
-      "INSERT INTO users(username, passwd) VALUES (?, ?)",
-      array($userName, hash("sha256", $passwordRegister))
-    );
+    $avatarUrl = uploadAvatar();
+    if (is_null($avatarUrl)) {
+      $query = DB::preparedQuery(
+        "INSERT INTO users(username, passwd) VALUES (?, ?)",
+        array($userName, hash("sha256", $passwordRegister))
+      );
+    } else {
+      $query = DB::preparedQuery(
+        "INSERT INTO users(username, passwd, avatar_url) VALUES (?, ?, ?)",
+        array($userName, hash("sha256", $passwordRegister), $avatarUrl)
+      );
+    }
 
     initSession($userName, $passwordRegister);
   }
@@ -67,4 +75,12 @@ function initSession($username, $password) {
   } else {
     echo "$logged";
   }
+}
+
+function uploadAvatar() {
+  if (empty($_FILES["imgFile"]["name"])) {
+    return;
+  }
+  $link = uploadToImgur($_FILES);
+  return $link;
 }

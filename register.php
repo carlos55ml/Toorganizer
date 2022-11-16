@@ -29,7 +29,7 @@
   <?php } ?>
 
   <!-- TODO pagina Register -->
-  <form action="./app/loginHandler.php?isRegister=true" method="post" class="userForm">
+  <form action="./app/loginHandler.php?isRegister=true" method="post" id="RegisterForm" class="userForm" enctype="multipart/form-data">
     <label for="usernameRegister">Nombre de usuario: </label>
     <input type="text" name="usernameRegister" id="usernameRegister" required>
     <br>
@@ -40,7 +40,7 @@
     <input type="password" name="confirmPasswordRegister" id="confirmPasswordRegister" required>
     <br>
     <label for="imgFile">Foto de perfil: </label>
-    <input type="file" name="imgFile" id="imgFile">
+    <input type="file" name="imgFile" id="imgFile" accept=".png, .jpg, .jpeg">
     <br>
     <a href="login.php"><button type="button">Inicia Sesion</button></a>
     <input type="submit" value="Registrarse" id="btnRegister">

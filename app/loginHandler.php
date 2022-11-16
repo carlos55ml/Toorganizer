@@ -23,8 +23,9 @@ if ($isLogin) {
   $passwordLogin = isset($_POST['passwordLogin']) ? $_POST['passwordLogin'] : null;
 
   initSession($userName, $passwordLogin);
-} else if ($isRegister) {
+} 
 
+if ($isRegister) {
   // Recoger variables del formulario
   $userName = isset($_POST['usernameRegister']) ? $_POST['usernameRegister'] : null;
   $passwordRegister = isset($_POST['passwordRegister']) ? $_POST['passwordRegister'] : null;
@@ -50,14 +51,17 @@ if ($isLogin) {
   }
 }
 
-function initSession($userName, $passwordLogin) {
-  $logged = tryUserLogin($userName, hash("sha256", $passwordLogin));
+/**
+ * Funcion para iniciar sesion en la pagina web.
+ * @param string $username Username.
+ * @param string $password Password.
+ */
+function initSession($username, $password) {
+  $logged = tryUserLogin($username, hash("sha256", $password));
 
   if ($logged === true) {
-    // TODO pulir sesion
-
     session_start();
-    $_SESSION['user'] = fetchUser($userName)['username'];
+    $_SESSION['user'] = fetchUser($username)['username'];
 
     header("Location:../index.php");
   } else {

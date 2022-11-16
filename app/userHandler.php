@@ -33,4 +33,9 @@ function tryUserLogin(string $user, string $pass) {
 
   return true;
 }
+
+function getAvatarUrl($user) {
+  $url = fetchUser($user)['avatar_url'];
+  return $url;
+}
 ?>

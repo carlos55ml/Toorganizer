@@ -16,7 +16,7 @@ if ($logout) {
   session_start();
   $_SESSION['user'] = null;
   session_destroy();
-  header("Location:./../../index.php");
+  header("Location:./../index.php");
 }
 
 if ($isLogin) {

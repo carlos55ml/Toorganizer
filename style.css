@@ -3,6 +3,18 @@
 }
 
 /*** Header ***/
+#userBox {
+    position: absolute;
+    top:25px;
+    left: 50px;
+}
+
+#imgUser {
+    width: 50px;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
 .imgHeader {
     background-color: black;
     height: 100px;

@@ -19,13 +19,7 @@
   }
   ?>
   <h1>Inicio</h1>
-  <?php
-  if ($userObj) {
-    echo "bienvenido ". $userObj['username'];
-  } else {
-    header("Location:login.php");
-  }
-  ?>
+  <?php echo "bienvenido ". $userObj['username']; ?>
 
   <form action="./app/loginHandler.php?logout=true" method="post">
     <input type="submit" value="Cerrar Sesion">

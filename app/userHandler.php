@@ -34,12 +34,11 @@ function tryUserLogin(string $user, string $pass) {
   return true;
 }
 
+/**
+ * Funcion que devuelve el avatar de un usuario
+ * @param string $user
+ * @return string String vacio si no existe el usuario, si existe devuelve la url.
+ */
 function getAvatarUrl($user) {
-  $userObj = fetchUser($user);
-  if (is_null($userObj)) {
-    return "";
-  } else {
-    return $userObj['avatar_url'];
-  }
+  return is_null($user) ? "" : fetchUser($user)['avatar_url'];
 }
-?>

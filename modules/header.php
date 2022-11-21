@@ -11,14 +11,16 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
   <?php
   if (isset($userObj)) {
   ?>
-    <div id="userBox">
-      <p id="username"><?php echo $userObj['username'] ?></p>
-      <img id="imgUser" src=<?php echo getAvatarUrl($userObj['username']) ?> alt="">
-    </div>
+    <a href="/view/profile.php?id=<?php echo $userObj['user_id'] ?>">
+      <div id="userBox">
+        <p id="username"><?php echo $userObj['username'] ?></p>
+        <img id="imgUser" src=<?php echo getAvatarUrl($userObj['username']) ?> alt="">
+      </div>
+    </a>
   <?php } ?>
 
-  <div class="imgHeader"><span class='whitebold'>Toorganizer</span></div>
-  <nav >
+  <div class="bg-header"><span class='whitebold'>Toorganizer</span></div>
+  <nav>
     <?php
     echo "<a href='index.php'>Inicio</a>";
     if ($userObj) {

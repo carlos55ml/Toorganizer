@@ -13,6 +13,18 @@ function fetchUser(string $user) {
   return empty($result[0]) ? null : $result[0];
 }
 
+/**
+ * Fetch an specific user from DB
+ * @param int $id The user id to find
+ * @return mixed The user Object, or null if no match.
+ */
+function fetchUserId(int $id) {
+  $query = 'SELECT * FROM users WHERE user_id = ?';
+  $values = array($id);
+  $result = DB::preparedQuery($query, $values);
+  return empty($result[0]) ? null : $result[0];
+}
+
 // TODO properly handle login
 /**
  * Try to log an user, given username and password.

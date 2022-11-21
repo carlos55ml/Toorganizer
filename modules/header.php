@@ -22,7 +22,7 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
     <?php
     echo "<a href='/index.php'>Inicio</a>";
     if ($userObj) {
-      echo "<a href='/view/profile.php'>Perfil</a><a href='./app/loginHandler.php?logout=true'>Cerrar sesión</a>";
+      echo "<a href='/view/profile.php'>Perfil</a><a href='/app/loginHandler.php?logout=true'>Cerrar sesión</a>";
     } else {
       echo "<a href='/login.php'>Login</a>";
     }

@@ -10,6 +10,8 @@
 </head>
 
 <body>
+  <div class="bg-img"></div>
+
   <?php
   include __DIR__ . '/modules/header.php';
 
@@ -28,26 +30,28 @@
   <?php } ?>
 
   <!-- TODO pagina Register -->
-  <form action="./app/loginHandler.php?isRegister=true" method="post" id="RegisterForm" class="userForm" enctype="multipart/form-data">
-    <h1>Register</h1>
+  <main>
+    <form action="./app/loginHandler.php?isRegister=true" method="post" id="RegisterForm" class="userForm" enctype="multipart/form-data">
+      <h1>Register</h1>
 
-    <label for="usernameRegister" class="col-30">Nombre de usuario: </label>
-    <input type="text" class="col-60" name="usernameRegister" id="usernameRegister" required>
-    <br>
-    <label for="passwordRegister" class="col-30">Contraseña: </label>
-    <input type="password" class="col-60" name="passwordRegister" id="passwordRegister" required>
-    <br>
-    <label for="confirmPasswordRegister" class="col-30">Repetir contraseña: </label>
-    <input type="password" class="col-60" name="confirmPasswordRegister" id="confirmPasswordRegister" required>
-    <br>
-    <label for="imgFile" class="col-30">Foto de perfil: </label>
-    <input type="file" class="col-60" name="imgFile" id="imgFile" accept=".png, .jpg, .jpeg">
-    <br>
-    <div class="center">
-      <a href="login.php"><button type="button">Inicia Sesion</button></a>
-      <input type="submit" value="Registrarse" id="btnRegister">
-    </div>
-  </form>
+      <label for="usernameRegister" class="col-30">Nombre de usuario: </label>
+      <input type="text" class="col-60" name="usernameRegister" id="usernameRegister" required>
+      <br>
+      <label for="passwordRegister" class="col-30">Contraseña: </label>
+      <input type="password" class="col-60" name="passwordRegister" id="passwordRegister" required>
+      <br>
+      <label for="confirmPasswordRegister" class="col-30">Repetir contraseña: </label>
+      <input type="password" class="col-60" name="confirmPasswordRegister" id="confirmPasswordRegister" required>
+      <br>
+      <label for="imgFile" class="col-30">Foto de perfil: </label>
+      <input type="file" class="col-60" name="imgFile" id="imgFile" accept=".png, .jpg, .jpeg">
+      <br>
+      <div class="center">
+        <a href="login.php"><button type="button" id="btnLogin">Inicia Sesion</button></a>
+        <button type="submit" id="btnRegister">Registrate</button>
+      </div>
+    </form>
+  </main>
 </body>
 
 </html>

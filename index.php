@@ -10,6 +10,8 @@
 </head>
 
 <body>
+  <div class="bg-img"></div>
+
   <?php
   include __DIR__ . '/modules/header.php';
 
@@ -18,12 +20,15 @@
     header('Location:login.php');
   }
   ?>
-  <h1>Inicio</h1>
-  <?php echo "bienvenido ". $userObj['username']; ?>
 
-  <form action="./app/loginHandler.php?logout=true" method="post">
-    <input type="submit" value="Cerrar Sesion">
-  </form>
+  <main>
+    <h1>Inicio</h1>
+    <?php echo "bienvenido " . $userObj['username']; ?>
+
+    <form action="./app/loginHandler.php?logout=true" method="post">
+      <input type="submit" value="Cerrar Sesion">
+    </form>
+  </main>
 </body>
 
 </html>

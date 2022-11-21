@@ -35,7 +35,6 @@ function fetchAllUsers() {
   return empty($result) ? null : $result;
 }
 
-// TODO properly handle login
 /**
  * Try to log an user, given username and password.
  * This will return true if user exist and password is correct, false otherwise.
@@ -48,7 +47,6 @@ function tryUserLogin(string $user, string $pass) {
   if (!$userObj) {
     return "'$user' NO EXISTE";
   }
-  // TODO encode passwd
   if ($pass !== $userObj['passwd']) {
     return "CONTRASENA INCORRECTA";
   }

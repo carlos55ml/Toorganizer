@@ -1,71 +1,5 @@
-:root {
-    font-family: 'Segoe UI', Tahoma;
-    --third-color: red;
-}
-
-/*** Header ***/
-.whitebold,
-nav>a,
-#username {
-    color: white;
-    font-weight: bold;
-}
-
-#userBox {
-    position: absolute;
-    top: 25px;
-    left: 50px;
-}
-
-#imgUser {
-    height: 50px;
-    width: 50px;
-
-    /* Redondear foto */
-    border: 2px solid white;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-#username {
-    position: inherit;
-
-    top: -27px;
-    left: 70px;
-    font-size: 2em;
-}
-
-.imgHeader {
-    background-color: black;
-    height: 100px;
-    margin: -8px -8px 0px -8px;
-
-    font-size: 2.5em;
-
-    /* Centrar texto vertical y horizontalmente */
-    text-align: center;
-    vertical-align: middle;
-    line-height: 92px;
-}
-
-nav a {
-    text-decoration: none;
-    padding: 12px 12px;
-    display: inline-block;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    background-color: black;
-    color: var(--third-color);
-    transition: 0.3s;
-}
-
-nav {
-    text-align: center;
-    background-color: var(--third-color);
-    margin: 0px -8px;
-}
+@import url('modules/header.css');
+@import url('modules/button.css');
 
 /*** Formulario ***/
 .userForm {
@@ -95,4 +29,84 @@ button {
 
 .center {
     text-align: center;
+}
+
+
+/* Botones */
+#btnLogin {
+    background-color: green;
+    padding: 6px 16px;
+    color: white;
+}
+
+#btnLogin:hover {
+    background-color: rgb(0, 110, 0);
+    transition-duration: 0.1s;
+}
+
+#btnLogin:active {
+    background-color: rgb(0, 90, 0);
+}
+
+#btnRegister {
+    background-color: yellow;
+    padding: 6px 16px;
+}
+
+#btnRegister:hover {
+    background-color: rgb(230, 230, 0);
+    transition-duration: 0.1s;
+}
+
+#btnRegister:active {
+    background-color: rgb(210, 210, 0);
+}
+
+
+
+
+/*** Main ***/
+html {
+    min-height: 100%;
+}
+
+.bg-img {
+    background-image: url('https://www.makarenalabs.com/wp-content/uploads/2021/06/tournament_bracket_board-1024x512.png');
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    z-index: -1;
+}
+
+/* Contenido principal */
+main {
+    position: absolute;
+    top: 145px;
+    left: 0;
+    right: 0;
+
+    width: calc(100% - 25ch);
+    height: calc(100% - 145px);
+
+    margin: 0 auto;
+    padding: 0 20px;
+
+    background-color: white;
+}
+
+@media screen and (max-width: 900px) {
+    main {
+        width: 100%;
+        padding: 0;
+    }
 }

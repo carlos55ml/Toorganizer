@@ -1,0 +1,82 @@
+:root {
+    font-family: 'Segoe UI', Tahoma;
+    --third-color: red;
+}
+
+/*** Header ***/
+
+/* Enlaces */
+.whitebold,
+nav>a,
+#username {
+    color: white;
+    font-weight: bold;
+}
+
+/* Info usuario */
+#userBox {
+    position: absolute;
+    top: 23px;
+    left: 50px;
+}
+
+#imgUser {
+    height: 50px;
+    width: 50px;
+    
+    /* Redondear foto */
+    border: 2px solid white;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#username {
+    position: inherit;
+    
+    top: -27px;
+    left: 70px;
+    font-size: 2em;
+}
+
+/* Responsive info usuario */
+@media screen and (max-width: 900px) {
+    #userBox {
+        left: 30px;
+    }
+
+    #username {
+        display: none;
+    }
+}
+
+.bg-header {
+    background-color: black;
+    height: 100px;
+    margin: -8px -8px 0px -8px;
+
+    font-size: 2.5em;
+
+    /* Centrar texto vertical y horizontalmente */
+    text-align: center;
+    vertical-align: middle;
+    line-height: 92px;
+}
+
+nav a {
+    text-decoration: none;
+    padding: 12px 12px;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    background-color: black;
+    color: var(--third-color);
+    transition: 0.3s;
+}
+
+nav {
+    text-align: center;
+    background-color: var(--third-color);
+    margin: 0px -8px;
+}

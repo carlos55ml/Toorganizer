@@ -106,7 +106,8 @@ main {
 
 @media screen and (max-width: 900px) {
     main {
-        width: 100%;
-        padding: 0;
+        width: calc(100% - 20px);
+        padding-left: 20px;
+        padding-right: 0px;
     }
 }

@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil - Toorganizer</title>
   <link rel="stylesheet" href="../style.css">
-
 </head>
 <body>
 <?php
@@ -27,8 +26,15 @@ if (is_null($id)) {
 $targetUserObj = fetchUserId($id);
 
 // TODO mostrar datos usuario
-echo "" . $targetUserObj['username'];
 
 ?>
+
+<div class="bg-img"></div>
+
+<main>
+  <?php
+  echo $targetUserObj['username'];
+  ?>
+</main>
 </body>
 </html>

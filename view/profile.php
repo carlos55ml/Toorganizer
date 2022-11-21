@@ -19,11 +19,12 @@ $id = isset($_GET['id'])?$_GET['id']:null;
 
 // si no pasamos id por GET, esta sera la id del usuario logueado.
 if (is_null($id)) {
-  $id = $userObj['user_id'];
+  $targetUserObj = $userObj;
+} else {
+  // el usuario a mostrar
+  $targetUserObj = fetchUserId($id);
 }
 
-// el usuario a mostrar
-$targetUserObj = fetchUserId($id);
 
 // TODO mostrar datos usuario
 

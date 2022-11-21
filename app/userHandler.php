@@ -25,6 +25,16 @@ function fetchUserId(int $id) {
   return empty($result[0]) ? null : $result[0];
 }
 
+/**
+ * Fetch all users from DB
+ * @return mixed The user array, or null if no match.
+ */
+function fetchAllUsers() {
+  $query = 'SELECT * FROM users';
+  $result = DB::preparedQuery($query);
+  return empty($result) ? null : $result;
+}
+
 // TODO properly handle login
 /**
  * Try to log an user, given username and password.

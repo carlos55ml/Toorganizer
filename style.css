@@ -38,6 +38,19 @@ button {
     object-fit: cover;
 }
 
+.img-round {
+    height: 200px;
+    width: 200px;
+
+    /* Centrar imagen */
+    margin: 20px auto;
+    display: block;
+
+    /* Redondear foto */
+    border: 2px solid black;
+    object-fit: cover;
+}
+
 
 /* Botones formulario */
 #btnLogin {

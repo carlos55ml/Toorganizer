@@ -10,8 +10,6 @@
 </head>
 
 <body>
-  <div class="bg-img"></div>
-
   <?php
   include __DIR__ . '/modules/header.php';
 

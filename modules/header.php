@@ -54,3 +54,5 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
     ?>
   </nav>
 </header>
+
+<div class="bg-img"></div>

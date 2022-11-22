@@ -30,8 +30,6 @@ if (is_null($id)) {
 
 ?>
 
-<div class="bg-img"></div>
-
 <main>
   <?php
   echo $targetUserObj['username'];

@@ -43,6 +43,10 @@ if (is_null($id)) {
     <br>
     <label for="imgUrl" class="col-30">URL de avatar: </label>
     <input type="text" name="imgUrl" id="imgUrl" class="col-60" disabled value="<?php echo $targetUserObj['avatar_url'];?>">
+    <br>
+    <label for="esAdmin" class="col-30">Es admin: </label>
+    <input type="text" name="esAdmin" id="esAdmin" class="col-60" disabled value="<?php echo $targetUserObj['isAdmin']?"Si." : "No."; ?>">
+    <!-- // TODO mostrar eventos activos que participa. -->
   </form>
   <?php } else { ?>
     <form action="" class="userForm">

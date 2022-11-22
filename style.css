@@ -31,6 +31,13 @@ button {
     text-align: center;
 }
 
+.user-avatar-view {
+  height: 300px;
+    width: 300px;
+    border: 1px solid rgb(0, 0, 0);
+    object-fit: cover;
+}
+
 
 /* Botones formulario */
 #btnLogin {

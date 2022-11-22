@@ -48,6 +48,7 @@ button {
 
     /* Redondear foto */
     border: 2px solid black;
+    border-radius: 10%;
     object-fit: cover;
 }
 

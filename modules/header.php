@@ -11,7 +11,7 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
   <?php
   if (isset($userObj)) {
   ?>
-    <a href="/view/profile.php?id=<?php echo $userObj['user_id'] ?>">
+    <a href="/view/profile.php">
       <div id="userBox">
         <p id="username"><?php echo $userObj['username'] ?></p>
         <img id="imgUser" src=<?php echo getAvatarUrl($userObj['username']) ?> alt="">

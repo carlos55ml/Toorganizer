@@ -19,17 +19,23 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
     </a>
   <?php } ?>
 
-  <div class="bg-header"><span class='whitebold'>Toorganizer</span></div>
+  <div class="bg-header"><span class='whitebold'><a href="/">Toorganizer</a></span></div>
   <nav>
     <?php
     $indexPath = '/index.php';
 
-    // TODO perfeccionar esta mierda
-    if ($indexPath == $_SERVER['SCRIPT_NAME']) {
-      echo "<a href='/index.php' class='active'>Inicio</a>";
-    } else {
-      echo "<a href='/index.php'>Inicio</a>";
+    /**
+     * Añadir rutas al navegador y comprobar si esta activo o no
+     */
+    function addToNav($name, $path) {
+      if ($path == $_SERVER['SCRIPT_NAME']) {
+        echo "<a href='$path' class='active'>$name</a>";
+      } else {
+        echo "<a href='$path'>$name</a>";
+      }
     }
+
+    addToNav('Inicio', '/index.php');
 
     if ($userObj) {
       $loginLinks = array(
@@ -38,18 +44,10 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
       );
 
       foreach ($loginLinks as $name => $path) {
-        if ($path == $_SERVER['SCRIPT_NAME']) {
-          echo "<a href='$path' class='active'>$name</a>";
-        } else {
-          echo "<a href='$path'>$name</a>";
-        }
+        addToNav($name, $path);
       }
     } else {
-      if ('/login.php' == $_SERVER['SCRIPT_NAME']) {
-        echo "<a href='/login.php' class='active'>Login</a>";
-      } else {
-        echo "<a href='/login.php'>Login</a>";
-      }
+      addToNav('Login', '/login.php');
     }
     ?>
   </nav>

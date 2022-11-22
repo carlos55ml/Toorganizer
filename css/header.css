@@ -7,10 +7,12 @@
 
 /* Enlaces */
 .whitebold,
+.whitebold a,
 nav>a,
 #username {
     color: white;
     font-weight: bold;
+    text-decoration: none;
 }
 
 /* Info usuario */

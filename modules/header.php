@@ -20,15 +20,15 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
   <?php } ?>
 
   <div class="bg-header"><span class='whitebold'><a href="/">Toorganizer</a></span></div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <nav>
     <?php
-    $indexPath = '/index.php';
-
     /**
      * Añadir rutas al navegador y comprobar si esta activo o no
      */
     function addToNav($name, $path) {
-      if ($path == $_SERVER['SCRIPT_NAME']) {
+      if (str_contains($path, $_SERVER['SCRIPT_NAME'])) {
         echo "<a href='$path' class='active'>$name</a>";
       } else {
         echo "<a href='$path'>$name</a>";
@@ -38,17 +38,42 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
     addToNav('Inicio', '/index.php');
 
     if ($userObj) {
-      $loginLinks = array(
-        "Perfil" => '/view/profile.php',
-        "Cerrar sesión" => '/app/loginHandler.php?logout=true'
-      );
+    ?>
+      <div class="submenu">
+        <a href="#">Eventos <i class='fa fa-caret-down'></i></a>
+        <div class="submenu-content">
+          <?php
+          $eventLinks = array(
+            "Mis eventos" => "/view/event.php",
+            "Buscar eventos" => "#"
+          );
 
-      foreach ($loginLinks as $name => $path) {
-        addToNav($name, $path);
-      }
+          foreach ($eventLinks as $name => $path) {
+            addToNav($name, $path);
+          }
+          ?>
+        </div>
+      </div>
+      <div class="submenu">
+        <a href="#">Perfil <i class='fa fa-caret-down'></i></a>
+        <div class="submenu-content">
+          <?php
+          $loginLinks = array(
+            "Mi perfil" => '/view/profile.php',
+            "Ver perfiles" => '/view/profiles.php',
+            "Cerrar sesión" => '/app/loginHandler.php?logout=true'
+          );
+          foreach ($loginLinks as $name => $path) {
+            addToNav($name, $path);
+          }
+          ?>
+        </div>
+      </div>
+    <?php
     } else {
       addToNav('Login', '/login.php');
     }
+    // echo $_SERVER['SCRIPT_NAME'];
     ?>
   </nav>
 </header>

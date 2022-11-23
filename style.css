@@ -1,5 +1,6 @@
 @import url('css/header.css');
 @import url('css/button.css');
+@import url('css/card.css');
 
 /*** Formulario ***/
 .userForm {
@@ -32,7 +33,7 @@ button {
 }
 
 .user-avatar-view {
-  height: 300px;
+    height: 300px;
     width: 300px;
     border: 1px solid rgb(0, 0, 0);
     object-fit: cover;
@@ -121,11 +122,33 @@ main {
     background-color: white;
 }
 
+.align-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+/* Texto no seleccionable */
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 /* Responsive main */
 @media screen and (max-width: 900px) {
     main {
         width: calc(100% - 20px);
         padding-left: 20px;
         padding-right: 0px;
+    }
+
+    .bg-img {
+        display: none;
     }
 }

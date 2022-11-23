@@ -7,13 +7,29 @@
 header {
     position: fixed;
     width: 100%;
-    z-index: 2;
+    z-index: 3;
+}
+
+.submenu {
+    display: inline;
+}
+
+.submenu-content {
+    display: none;
+    position: absolute;
+    background-color: black;
+    width: 100%;
+}
+
+.submenu:hover .submenu-content {
+    display: block;
 }
 
 /* Enlaces */
 .whitebold,
 .whitebold a,
 nav>a,
+.submenu a,
 #username {
     color: white;
     font-weight: bold;
@@ -30,7 +46,7 @@ nav>a,
 #imgUser {
     height: 50px;
     width: 50px;
-    
+
     /* Redondear foto */
     border: 2px solid white;
     border-radius: 50%;
@@ -39,7 +55,7 @@ nav>a,
 
 #username {
     position: inherit;
-    
+
     top: -27px;
     left: 70px;
     font-size: 2em;
@@ -76,7 +92,8 @@ nav a {
     transition: 0.3s;
 }
 
-nav a:hover, nav a.active {
+nav a:hover,
+nav a.active {
     background-color: black;
     color: var(--third-color);
     transition: 0.3s;

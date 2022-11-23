@@ -1,6 +1,5 @@
 <?php
 include __DIR__ . '/userHandler.php';
-include __DIR__ . '/image.php';
 
 /**
  * recibe un post y un get.
@@ -77,10 +76,3 @@ function initSession($username, $password) {
   }
 }
 
-function uploadAvatar() {
-  if (empty($_FILES["imgFile"]["name"])) {
-    return;
-  }
-  $link = uploadToImgur($_FILES);
-  return $link;
-}

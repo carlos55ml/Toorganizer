@@ -1,0 +1,47 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-height: 400px;
+    max-width: 200px;
+    margin: 20px;
+    text-align: center;
+    transition: 0.3s;
+
+    padding-bottom: 10px;
+    border-radius: 15px;
+
+    font-size: 18px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card:hover,
+.card>img:hover {
+    border-radius: 0px;
+    transition: 0.3s;
+}
+
+.card>img {
+    height: 188px;
+    width: 100%;
+    object-fit: cover;
+
+    border-radius: 15px 15px 0 0;
+    transition: 0.3s;
+}
+
+.link {
+    color: black;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+    align-items: end;
+}

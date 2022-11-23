@@ -20,18 +20,20 @@
   $id = isset($_GET['id']) ? $_GET['id'] : null;
   $isAdmin = $userObj['isAdmin'];
   // si no pasamos id por GET, esta sera la id del usuario logueado.
-  if (is_null($id)) {
+  if (is_null($id) || $id == $userObj['user_id'] ) {
     $targetUserObj = $userObj;
     $isSelf = true;
     $id = $userObj['user_id'];
   } else {
     // el usuario a mostrar
     $isSelf = false;
-    if ($isAdmin) {
-      $targetUserObj = fetchUserId($id);
-    } else {
-      header("Location:/view/profile.php");
-    }
+
+    // por si ak47
+    // if ($isAdmin) {
+    //   $targetUserObj = fetchUserId($id);
+    // } else {
+    //   header("Location:/view/profile.php");
+    // }
   }
   ?>
 

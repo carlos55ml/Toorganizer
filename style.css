@@ -92,8 +92,7 @@ button {
     filter: blur(5px);
     -webkit-filter: blur(5px);
 
-    position: absolute;
-    top: 0;
+    position: fixed;
     left: 0;
     width: 100%;
     height: 100%;
@@ -113,7 +112,7 @@ main {
     right: 0;
 
     width: calc(100% - 25ch);
-    height: calc(100% - 145px);
+    min-height: calc(100% - 145px);
     max-width: 1200px;
 
     margin: 0 auto;

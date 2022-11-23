@@ -4,6 +4,11 @@
 }
 
 /*** Header ***/
+header {
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
 
 /* Enlaces */
 .whitebold,
@@ -18,7 +23,7 @@ nav>a,
 /* Info usuario */
 #userBox {
     position: absolute;
-    top: 23px;
+    top: 15px;
     left: 50px;
 }
 

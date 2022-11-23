@@ -1,5 +1,36 @@
 <?php
 include __DIR__ . '/DB.php';
+include __DIR__ . '/image.php';
+
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $changeAvatar = isset($_GET['changeAvatar'])?$_GET['changeAvatar']:false;
+  if($changeAvatar) changeAvatar();
+}
+
+function changeAvatar() {
+  $tId = isset($_GET['tId'])?$_GET['tId']:null;
+  if (is_null($tId)) {
+    // TODO error al subir
+    echo "ERROR";
+    return;
+  }
+  $avatarUrl = uploadAvatar();
+  if (is_null($avatarUrl)) {
+    DB::preparedQuery(
+      'UPDATE users SET avatar_url = DEFAULT WHERE user_id = ?',
+      Array($tId)
+    );
+  } else {
+    DB::preparedQuery(
+      'UPDATE users SET avatar_url = ? WHERE user_id = ?',
+      Array($avatarUrl, $tId)
+    );
+  }
+  header("Location:/view/profile.php");
+}
 
 /**
  * Fetch an specific user from DB
@@ -56,9 +87,17 @@ function tryUserLogin(string $user, string $pass) {
 
 /**
  * Funcion que devuelve el avatar de un usuario
- * @param string $user
+ * @param string $user nombre del usuario.
  * @return string String vacio si no existe el usuario, si existe devuelve la url.
  */
 function getAvatarUrl($user) {
   return is_null($user) ? "" : fetchUser($user)['avatar_url'];
+}
+
+function uploadAvatar() {
+  if (empty($_FILES["imgFile"]["name"])) {
+    return;
+  }
+  $link = uploadToImgur($_FILES);
+  return $link;
 }

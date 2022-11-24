@@ -27,6 +27,7 @@
   } else {
     // el usuario a mostrar
     $isSelf = false;
+    $targetUserObj = fetchUserId($id);
 
     // por si ak47
     // if ($isAdmin) {

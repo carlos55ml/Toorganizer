@@ -55,6 +55,9 @@ if ($isRegister) {
     }
 
     initSession($userName, $passwordRegister);
+  } else {
+    setcookie("errorMessage", "El usuario ya existe.", 0, "/");
+    header("Location:/error.php");
   }
 }
 
@@ -72,7 +75,8 @@ function initSession($username, $password) {
 
     header("Location:../index.php");
   } else {
-    echo "$logged";
+    setcookie("errorMessage", $logged, 0, "/");
+    header("Location:/error.php");
   }
 }
 

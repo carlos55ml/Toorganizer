@@ -84,8 +84,9 @@ button {
     background-color: rgb(210, 210, 0);
 }
 
-
-
+#btnBack {
+  background-color: rgb(206, 206, 206);
+}
 
 /*** Main ***/
 .bg-img {

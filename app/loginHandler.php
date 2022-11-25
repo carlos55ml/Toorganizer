@@ -22,6 +22,11 @@ if ($isLogin) {
   $userName = isset($_POST['usernameLogin']) ? $_POST['usernameLogin'] : null;
   $passwordLogin = isset($_POST['passwordLogin']) ? $_POST['passwordLogin'] : null;
 
+  if (is_null($userName) or is_null($passwordLogin)) {
+    setcookie("errorMessage", "No se han rellenado todos los campos.", 0, "/");
+    header("Location:/error.php");
+  }
+
   initSession($userName, $passwordLogin);
 } 
 
@@ -30,7 +35,11 @@ if ($isRegister) {
   $userName = isset($_POST['usernameRegister']) ? $_POST['usernameRegister'] : null;
   $passwordRegister = isset($_POST['passwordRegister']) ? $_POST['passwordRegister'] : null;
   $confirmPasswordRegister = isset($_POST['confirmPasswordRegister']) ? $_POST['confirmPasswordRegister'] : null;
-  //$imgFile = isset($_POST['imgFile']) ? $_POST['imgFile'] : null;
+
+  if (is_null($userName) or is_null($passwordRegister) or is_null($confirmPasswordRegister)) {
+    setcookie("errorMessage", "No se han rellenado todos los campos.", 0, "/");
+    header("Location:/error.php");
+  }
 
   // Si el usuario no existe, añadirlo a la BBDD.
   if (!fetchUser($userName)) {

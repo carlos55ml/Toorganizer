@@ -79,9 +79,8 @@ nav>a,
 
     font-size: 2.5em;
 
-    /* Centrar texto vertical y horizontalmente */
+    /* Centrar texto */
     text-align: center;
-    vertical-align: middle;
     line-height: 92px;
 }
 
@@ -96,7 +95,6 @@ nav a:hover,
 nav a.active {
     background-color: black;
     color: var(--third-color);
-    transition: 0.3s;
 }
 
 nav {

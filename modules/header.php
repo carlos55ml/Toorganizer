@@ -29,7 +29,7 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
      */
     function addToNav($name, $path) {
       if (str_contains($path, $_SERVER['SCRIPT_NAME'])) {
-        echo "<a href='$path' class='active'>$name</a>";
+        echo "<a href='#' class='active'>$name</a>";
       } else {
         echo "<a href='$path'>$name</a>";
       }
@@ -37,25 +37,21 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
 
     addToNav('Inicio', '/index.php');
 
+    // POR FAVOR NO TOCAR ESTO POR LO QUE MAS QUIERAS NO QUIERO MAS PUTOS ESPACIOS EN EL NAV
     if ($userObj) {
-    ?>
-      <div class="submenu">
-        <a href="#">Eventos <i class='fa fa-caret-down'></i></a>
-        <div class="submenu-content">
+    ?><div class="submenu"><?php addToNav("Eventos <i class='fa fa-caret-down'></i>", "#") ?><div class="submenu-content">
           <?php
           $eventLinks = array(
             "Mis eventos" => "/view/event.php",
-            "Buscar eventos" => "#"
+            "Buscar eventos" => "#",
+            "Crear evento" => "/view/createEvent.php"
           );
 
           foreach ($eventLinks as $name => $path) {
             addToNav($name, $path);
           }
           ?>
-        </div>
-      </div>
-      <div class="submenu">
-        <a href="#">Perfil <i class='fa fa-caret-down'></i></a>
+        </div></div><div class="submenu"><?php addToNav("Perfil <i class='fa fa-caret-down'></i>", "#") ?>
         <div class="submenu-content">
           <?php
           $loginLinks = array(
@@ -63,11 +59,11 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
             "Ver perfiles" => '/view/profiles.php',
             "Cerrar sesión" => '/app/loginHandler.php?logout=true'
           );
+
           foreach ($loginLinks as $name => $path) {
             addToNav($name, $path);
           }
-          ?>
-        </div>
+          ?></div>
       </div>
     <?php
     } else {

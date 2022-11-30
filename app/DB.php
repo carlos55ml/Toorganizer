@@ -62,6 +62,25 @@ class DB {
       return null;
     }
   }
+
+  /**
+   * Executes a prepared statment and returns the last inser id.
+   * @param string $query The query to prepare.
+   * @param array $values The values of the prepared query.
+   * @return mixed The last insert id, or null if failed.
+   */
+  public static function preparedQueryRetId(string $query, array $values) {
+    if (!self::checkDbConnection()) return null;
+    try {
+      $stmt = self::$dbo->prepare($query);
+      $stmt->execute($values);
+      $result = self::$dbo->lastInsertId();
+      return $result;
+    } catch (PDOException $ex) {
+      echo "<br><b>ERROR EN LA QUERY PREPARADA</b> $query<br>";
+      return null;
+    }
+  }
 }
 DB::connect();
 ?>

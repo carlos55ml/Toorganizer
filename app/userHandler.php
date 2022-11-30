@@ -1,6 +1,6 @@
 <?php
-include __DIR__ . '/DB.php';
-include __DIR__ . '/image.php';
+include_once __DIR__ . '/DB.php';
+include_once __DIR__ . '/image.php';
 
 
 

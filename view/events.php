@@ -12,11 +12,19 @@
   include_once __DIR__ . "/../modules/header.php";
   include_once __DIR__ . "/../app/eventHandler.php";
 
+  $participant = isset($_GET['participant'])?$_GET['participant']:null;
+  $admin = isset($_GET['admin'])?$_GET['admin']:null;
+
+  $events = null;
+
+  if ($participant) {
+    $events = fetchParticipantEvents($userObj['user_id']);
+  }
   
   ?>
 
   <main>
-    
+    <?php print_r($events) ?>
   </main>
 </body>
 </html>

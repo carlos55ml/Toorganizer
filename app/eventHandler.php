@@ -23,6 +23,13 @@ function fetchEvent($eventId) {
   return DB::preparedQuery('SELECT * FROM events WHERE event_id=?', array($eventId));
 }
 
+function fetchParticipantEvents($userId) {
+  $queryString = 'SELECT e.* FROM events e, event_participants ep WHERE e.event_id=ep.event_id AND ep.user_id=?';
+  $queryValues = array($userId);
+
+  return DB::preparedQuery($queryString, $queryValues);
+}
+
 /**
  * Anade un nuevo organizador a un evento
  * @param int $event El evento al que anadir.

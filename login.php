@@ -14,7 +14,7 @@
   include __DIR__ . '/modules/header.php';
 
   // Si el usuario esta logeado, redirige a index
-  if (isset($userObj['user'])) {
+  if ($userObj) {
     header('Location:index.php');
   }
   ?>

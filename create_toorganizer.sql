@@ -38,12 +38,15 @@ CREATE TABLE IF NOT EXISTS `chat_messages` (
 -- Volcando estructura para tabla toorganizer.events
 CREATE TABLE IF NOT EXISTS `events` (
   `event_id` int(11) NOT NULL AUTO_INCREMENT,
-  `NAME` varchar(100) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
   `game` varchar(100) DEFAULT NULL,
   `logo_url` varchar(100) DEFAULT 'https://i.imgur.com/0hTFTZf.png',
-  `state` enum('pending','running','finished','canceled') DEFAULT 'pending',
-  PRIMARY KEY (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `state` enum('setup','pending','running','finished','canceled') DEFAULT 'pending',
+  `owner` int(11) DEFAULT NULL,
+  PRIMARY KEY (`event_id`),
+  KEY `FK_events_users` (`owner`),
+  CONSTRAINT `FK_events_users` FOREIGN KEY (`owner`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -101,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `isAdmin` tinyint(1) DEFAULT 0,
   `avatar_url` varchar(255) DEFAULT 'https://i.imgur.com/qF8tRFr.png',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
 -- La exportación de datos fue deseleccionada.
 

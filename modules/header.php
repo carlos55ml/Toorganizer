@@ -28,7 +28,7 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
      * Añadir rutas al navegador y comprobar si esta activo o no
      */
     function addToNav($name, $path) {
-      if (str_contains($path, $_SERVER['SCRIPT_NAME'])) {
+      if ($path == $_SERVER['REQUEST_URI']) {
         echo "<a href='#' class='active'>$name</a>";
       } else {
         echo "<a href='$path'>$name</a>";
@@ -52,7 +52,9 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
             addToNav($name, $path);
           }
           ?>
-        </div></div><div class="submenu"><?php addToNav("Perfil <i class='fa fa-caret-down'></i>", "#") ?>
+        </div>
+      </div>
+      <div class="submenu"><?php addToNav("Perfil <i class='fa fa-caret-down'></i>", "#") ?>
         <div class="submenu-content">
           <?php
           $loginLinks = array(

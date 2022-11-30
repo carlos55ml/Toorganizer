@@ -42,8 +42,9 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
     ?><div class="submenu"><?php addToNav("Eventos <i class='fa fa-caret-down'></i>", "#") ?><div class="submenu-content">
           <?php
           $eventLinks = array(
-            "Mis eventos" => "/view/event.php",
-            "Buscar eventos" => "#",
+            "Mis eventos" => "/view/events.php?participant=true",
+            "Buscar eventos" => "/view/events.php",
+            "Administrar eventos" => "/view/events.php?admin=true",
             "Crear evento" => "/view/createEvent.php"
           );
 

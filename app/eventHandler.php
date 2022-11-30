@@ -3,11 +3,11 @@ include_once __DIR__ . '/DB.php';
 include_once __DIR__ . '/image.php';
 
 enum State {
-  case setup;
-  case pending;
-  case running;
-  case finished;
-  case canceled;
+  case setup; // El evento esta siendo configurado.
+  case pending; // El evento esta pendiente de empezar.
+  case running; // El evento esta en curso.
+  case finished; // El evento esta finalizado.
+  case canceled; // El evento ha sido cancelado.
 }
 
 /**
@@ -19,10 +19,20 @@ function fetchAllEvents() {
   return $events;
 }
 
+/**
+ * Devuelve un evento en especifico buscando su id
+ * @param int $eventId Id del evento a buscar
+ * @return mixed El objeto del evento
+ */
 function fetchEvent($eventId) {
   return DB::preparedQuery('SELECT * FROM events WHERE event_id=?', array($eventId));
 }
 
+/**
+ * Devuelve solo los eventos en los que este participando un usuario en particular
+ * @param int $userId El usuario que queremos buscar
+ * @return mixed Array con los eventos en los que el usuario participa.
+ */
 function fetchParticipantEvents($userId) {
   $queryString = 'SELECT e.* FROM events e, event_participants ep WHERE e.event_id=ep.event_id AND ep.user_id=?';
   $queryValues = array($userId);

@@ -1,5 +1,6 @@
 <?php
 include __DIR__ . '/userHandler.php';
+include_once __DIR__ . './../app/utils.php';
 
 /**
  * recibe un post y un get.

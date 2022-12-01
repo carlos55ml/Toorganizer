@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/DB.php';
 include_once __DIR__ . '/image.php';
+include_once __DIR__ . './../app/utils.php';
 
 enum State {
   case setup; // El evento esta siendo configurado.
@@ -89,10 +90,10 @@ function createEvent(string $name, string $game, string $logoUrl, State $state =
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $isCreate = isset($_GET['isCreate'])?$_GET['isCreate']:null;
   if ($isCreate) {
-    $eventName = isset($_POST['eventName'])?$_POST['eventName']:"null";
-    $eventGameName = isset($_POST['eventGameName'])?$_POST['eventGameName']:"null";
+    $eventName = isset($_POST['eventName'])? xss_clean($_POST['eventName']):"null";
+    $eventGameName = isset($_POST['eventGameName'])? xss_clean($_POST['eventGameName']):"null";
     $eventLogo = uploadLogo();
-    $ownerId = isset($_POST['ownerId'])? (int)$_POST['ownerId']:0;
+    $ownerId = isset($_POST['ownerId'])? (int)xss_clean($_POST['ownerId']):0;
 
     createEvent($eventName, $eventGameName, $eventLogo, State::setup, $ownerId);
   }

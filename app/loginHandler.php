@@ -19,8 +19,8 @@ if ($logout) {
 }
 
 if ($isLogin) {
-  $userName = isset($_POST['usernameLogin']) ? $_POST['usernameLogin'] : null;
-  $passwordLogin = isset($_POST['passwordLogin']) ? $_POST['passwordLogin'] : null;
+  $userName = isset($_POST['usernameLogin']) ? xss_clean($_POST['usernameLogin']) : null;
+  $passwordLogin = isset($_POST['passwordLogin']) ? xss_clean($_POST['passwordLogin']) : null;
 
   if (is_null($userName) or is_null($passwordLogin)) {
     setcookie("errorMessage", "No se han rellenado todos los campos.", 0, "/");
@@ -32,9 +32,9 @@ if ($isLogin) {
 
 if ($isRegister) {
   // Recoger variables del formulario
-  $userName = isset($_POST['usernameRegister']) ? $_POST['usernameRegister'] : null;
-  $passwordRegister = isset($_POST['passwordRegister']) ? $_POST['passwordRegister'] : null;
-  $confirmPasswordRegister = isset($_POST['confirmPasswordRegister']) ? $_POST['confirmPasswordRegister'] : null;
+  $userName = isset($_POST['usernameRegister']) ? xss_clean($_POST['usernameRegister']) : null;
+  $passwordRegister = isset($_POST['passwordRegister']) ? xss_clean($_POST['passwordRegister']) : null;
+  $confirmPasswordRegister = isset($_POST['confirmPasswordRegister']) ? xss_clean($_POST['confirmPasswordRegister']) : null;
 
   if (is_null($userName) or is_null($passwordRegister) or is_null($confirmPasswordRegister)) {
     setcookie("errorMessage", "No se han rellenado todos los campos.", 0, "/");

@@ -10,13 +10,23 @@ enum State {
   case finished; // El evento esta finalizado.
   case canceled; // El evento ha sido cancelado.
 
-  function string() {
+  function value() {
     return match($this) {
       State::setup => "En preparacion",
       State::pending => "Pendiente",
       State::running => "En curso",
       State::finished => "Finalizado",
       State::canceled => "Cancelado",
+    };
+  }
+
+  function key() {
+    return match($this) {
+      State::setup => "setup",
+      State::pending => "pending",
+      State::running => "running",
+      State::finished => "finished",
+      State::canceled => "canceled",
     };
   }
 }

@@ -1,0 +1,16 @@
+.event-header{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 5px;
+  margin-top: 10px;
+}
+.event-name {
+  font-size: 2em;
+  font-weight: bold;
+}
+.creator-name {
+  font-weight: bold;
+}
+.game-name {
+  font-weight: bold;
+}

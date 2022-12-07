@@ -22,6 +22,7 @@ if(!is_null($eventId) or !empty($eventId)) {
 if($thisEvent) {
   $eventNotFound = false;
   $eventName = $thisEvent['name'];
+  
 } else {
   $eventNotFound = true;
   $eventName = "NO ENCONTRADO";
@@ -48,8 +49,12 @@ if($thisEvent) {
     <div class="center">
       <h1>Evento no encontrado</h1>
     </div>
-  <?php } else { ?>
-    
+  <?php } else { $creator = fetchUserId($thisEvent['owner']); ?>
+    <div class="event-header center">
+      <span class="event-name"><?php echo $thisEvent['name'] ?></span> <br><br>
+      Juego: <span class="game-name"><?php echo $thisEvent['game'] ?></span> <br>
+      Creador: <a href="./profile.php?id=<?php echo $creator[0] ?>" class="link"><span class="creator-name"><?php echo $creator['username'] ?></span></a>
+    </div>
   <?php } ?>
   </main>
 </body>

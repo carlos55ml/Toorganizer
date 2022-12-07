@@ -12,6 +12,10 @@ enum State {
 }
 
 /**
+ * DEVUELVE EVENTOS
+ */
+
+/**
  * Devuelve todos los eventos guardados.
  * @return mixed Array con todos los eventos
  */
@@ -54,6 +58,36 @@ function fetchStaffEvents($userId) {
 }
 
 /**
+ * DEVUELVE USUARIOS
+ */
+
+/**
+ * Devuelve los participantes de un evento
+ * @param int $eventId La id del evento
+ * @return mixed Array con los participantes del evento
+ */
+function fetchEventParticipants($eventId) {
+  $queryString = "SELECT u.* FROM users u, events e, event_participants ep WHERE u.user_id=ep.user_id AND e.event_id=ep.event_id AND e.event_id=?";
+  $queryValues = array($eventId);
+  return DB::preparedQuery($queryString, $queryValues);
+}
+
+/**
+ * Devuelve los admins de un evento
+ * @param int $eventId La id del evento
+ * @return mixed Array con los admins del evento
+ */
+function fetchEventAdmins($eventId) {
+  $queryString = "SELECT u.* FROM users u, events e, event_organizers eo WHERE u.user_id=eo.user_id AND e.event_id=eo.event_id AND e.event_id=?";
+  $queryValues = array($eventId);
+  return DB::preparedQuery($queryString, $queryValues);
+}
+
+/**
+ * FUNCIONES VARIAS
+ */
+
+/**
  * Anade un nuevo organizador a un evento
  * @param int $event El evento al que anadir.
  * @param int $organizer El usuario organizador a anadir.
@@ -65,18 +99,6 @@ function addOrganizerToEvent($event, $organizer) {
 }
 
 /**
- * Devuelve todos los organizadores de un evento en concreto.
- * @param int $event El evento del que sacar los organizadores
- * @return array Todos los organizadores del evento dado
- */
-function getEventOrganizers($event) {
-  $queryString = 'SELECT * FROM event_organizers WHERE event_id=?';
-  $queryValues = array($event);
-  $result = DB::preparedQuery($queryString, $queryValues);
-  return $result;
-}
-
-/**
  * Crea un evento y guardalo a la base de datos.
  * @param string $name Nombre del evento.
  * @param string $game Juego en el que se basa el evento.
@@ -85,7 +107,7 @@ function getEventOrganizers($event) {
  * @param int $ownerId ID del usuario que lo ha creado.
  * @return bool Devuelve true si se ha guardado correctamente el evento.
  */
-function createEvent(string $name, string $game, string $logoUrl, State $state = State::setup, int $ownerId ) {
+function createEvent(string $name, string $game, string $logoUrl, State $state = State::setup, int $ownerId) {
   $queryString = 'INSERT INTO events(name, game, logo_url, state, owner) VALUES (?, ?, ?, ?, ?)';
   $queryValues = array($name, $game, $logoUrl, $state->name, $ownerId);
   $result = DB::preparedQueryRetId($queryString, $queryValues);
@@ -99,13 +121,17 @@ function createEvent(string $name, string $game, string $logoUrl, State $state =
   }
 }
 
+
+/**
+ * LOGICA CREACION EVENTOS
+ */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $isCreate = isset($_GET['isCreate'])?$_GET['isCreate']:null;
+  $isCreate = isset($_GET['isCreate']) ? $_GET['isCreate'] : null;
   if ($isCreate) {
-    $eventName = isset($_POST['eventName'])? xss_clean($_POST['eventName']):"null";
-    $eventGameName = isset($_POST['eventGameName'])? xss_clean($_POST['eventGameName']):"null";
+    $eventName = isset($_POST['eventName']) ? xss_clean($_POST['eventName']) : "null";
+    $eventGameName = isset($_POST['eventGameName']) ? xss_clean($_POST['eventGameName']) : "null";
     $eventLogo = uploadLogo();
-    $ownerId = isset($_POST['ownerId'])? (int)xss_clean($_POST['ownerId']):0;
+    $ownerId = isset($_POST['ownerId']) ? (int)xss_clean($_POST['ownerId']) : 0;
 
     createEvent($eventName, $eventGameName, $eventLogo, State::setup, $ownerId);
   }
@@ -119,4 +145,3 @@ function uploadLogo() {
   $link = uploadToImgur($_FILES);
   return $link;
 }
-?>

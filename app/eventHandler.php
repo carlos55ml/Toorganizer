@@ -3,12 +3,22 @@ include_once __DIR__ . '/DB.php';
 include_once __DIR__ . '/image.php';
 include_once __DIR__ . './../app/utils.php';
 
-enum State: string {
-  case setup = 'En preparacion'; // El evento esta siendo configurado.
-  case pending = 'Pendiente'; // El evento esta pendiente de empezar.
-  case running = 'En curso'; // El evento esta en curso.
-  case finished = 'Finalizado'; // El evento esta finalizado.
-  case canceled = 'Cancelado'; // El evento ha sido cancelado.
+enum State {
+  case setup; // El evento esta siendo configurado.
+  case pending; // El evento esta pendiente de empezar.
+  case running; // El evento esta en curso.
+  case finished; // El evento esta finalizado.
+  case canceled; // El evento ha sido cancelado.
+
+  function string() {
+    return match($this) {
+      State::setup => "En preparacion",
+      State::pending => "Pendiente",
+      State::running => "En curso",
+      State::finished => "Finalizado",
+      State::canceled => "Cancelado",
+    };
+  }
 }
 
 /**

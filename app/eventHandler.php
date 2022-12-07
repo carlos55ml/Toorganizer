@@ -67,7 +67,12 @@ function fetchStaffEvents($userId) {
  * @return mixed Array con los participantes del evento
  */
 function fetchEventParticipants($eventId) {
-  $queryString = "SELECT u.* FROM users u, events e, event_participants ep WHERE u.user_id=ep.user_id AND e.event_id=ep.event_id AND e.event_id=?";
+  $queryString =
+    "SELECT u.* FROM users u, events e, event_participants ep
+   WHERE u.user_id=ep.user_id 
+   AND e.event_id=ep.event_id 
+   AND e.event_id=?";
+
   $queryValues = array($eventId);
   return DB::preparedQuery($queryString, $queryValues);
 }
@@ -78,7 +83,12 @@ function fetchEventParticipants($eventId) {
  * @return mixed Array con los admins del evento
  */
 function fetchEventAdmins($eventId) {
-  $queryString = "SELECT u.* FROM users u, events e, event_organizers eo WHERE u.user_id=eo.user_id AND e.event_id=eo.event_id AND e.event_id=?";
+  $queryString =
+    "SELECT u.* FROM users u, events e, event_organizers eo
+  WHERE u.user_id=eo.user_id 
+  AND e.event_id=eo.event_id 
+  AND e.event_id=?";
+
   $queryValues = array($eventId);
   return DB::preparedQuery($queryString, $queryValues);
 }

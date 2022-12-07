@@ -20,6 +20,13 @@
   if ($participant) {
     $events = fetchParticipantEvents($userObj['user_id']);
   }
+  if ($admin) {
+    $events = fetchStaffEvents($userObj['user_id']);
+  }
+
+  if (!$participant and !$admin) {
+    $events = fetchAllEvents();
+  }
   
   ?>
 

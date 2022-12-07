@@ -16,7 +16,7 @@ enum State {
  * @return mixed Array con todos los eventos
  */
 function fetchAllEvents() {
-  $events = DB::query('SELECT * FROM events');
+  $events = DB::preparedQuery('SELECT * FROM events', array());
   return $events;
 }
 
@@ -36,6 +36,18 @@ function fetchEvent($eventId) {
  */
 function fetchParticipantEvents($userId) {
   $queryString = 'SELECT e.* FROM events e, event_participants ep WHERE e.event_id=ep.event_id AND ep.user_id=?';
+  $queryValues = array($userId);
+
+  return DB::preparedQuery($queryString, $queryValues);
+}
+
+/**
+ * Devuelve solo los eventos en los que este administrando un usuario en particular
+ * @param int $userId El usuario que queremos buscar
+ * @return mixed Array con los eventos en los que el usuario administra.
+ */
+function fetchStaffEvents($userId) {
+  $queryString = 'SELECT e.* FROM events e, event_organizers eo WHERE e.event_id=eo.event_id AND eo.user_id=?';
   $queryValues = array($userId);
 
   return DB::preparedQuery($queryString, $queryValues);

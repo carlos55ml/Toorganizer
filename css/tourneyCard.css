@@ -1,0 +1,93 @@
+.tourney-content {
+    position: relative;
+    margin: 20px;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.tourney-card {
+    width: 100%;
+    min-height: 100px;
+    padding: 20px;
+    background-image: url("https://i.vgy.me/wy090M.jpg");
+    background-size: cover;
+    background-position: bottom;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    margin: 20px 0;
+    position: relative;
+}
+
+.tourney-info {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    color: white;
+}
+
+.tourney-info img {
+    width: 150px;
+    height: 150px;
+}
+
+.tourney-info .tourney-data {
+    width: 100%;
+    padding: 0px 20px;
+}
+
+.tourney-info .tourney-data h1 {
+    font-size: 1.8em;
+}
+
+.tourney-info .tourney-data h3 {
+    font-size: 1.2em;
+    font-style: italic;
+}
+
+.tourney-info .tourney-data div.status-owner {
+    display: block;
+}
+
+.tourney-info .tourney-data span.status {
+    padding: 10px 0px;
+    line-height: 1.2;
+    font-style: initial;
+    vertical-align: middle;
+}
+
+.tourney-info .tourney-data span.status span.circle {
+    display: inline-block;
+    vertical-align: bottom;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+
+.tourney-info .tourney-data span.status span.circle-setup {
+    background-color: red;
+}
+
+.tourney-info .tourney-data span.status span.circle-pending {
+    background-color: orangered;
+}
+
+.tourney-info .tourney-data span.status span.circle-running {
+    background-color: green;
+}
+
+.tourney-info .tourney-data span.status span.circle-finished {
+    background-color: yellow;
+}
+
+.tourney-info .tourney-data span.status span.circle-canceled {
+    background-color: black;
+}
+
+.tourney-info .tourney-data span.owner {
+    text-align: right;
+    float: right;
+}

@@ -1,6 +1,7 @@
 @import url('css/header.css');
 @import url('css/button.css');
-@import url('css/card.css');
+@import url('css/profileCard.css');
+@import url('css/tourneyCard.css');
 @import url('css/event.css');
 
 /*** Formulario ***/
@@ -147,7 +148,6 @@ main {
     main {
         width: calc(100% - 20px);
         padding-left: 20px;
-        padding-right: 0px;
     }
 
     .bg-img {

@@ -15,7 +15,8 @@ class DB {
       self::$dbo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
       self::$dbo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $ex) {
-      echo "Error en la conexion " . $ex->getMessage();
+      setcookie("errorMessage", "Error en la conexion a Base de Datos.", 0, "/");
+      header("Location:/error.php");
       self::$dbo = null;
     }
   }
@@ -40,6 +41,8 @@ class DB {
       $result = self::$dbo->query($query);
       return $result;
     } catch (PDOException $ex) {
+      setcookie("errorMessage", "Error en la query $query.", 0, "/");
+      header("Location:/error.php");
       return null;
     }
   }
@@ -58,7 +61,8 @@ class DB {
       $result = $stmt->fetchAll();
       return $result;
     } catch (PDOException $ex) {
-      echo "<br><b>ERROR EN LA QUERY PREPARADA</b> $query<br>";
+      setcookie("errorMessage", "Error en la query $query.", 0, "/");
+      header("Location:/error.php");
       return null;
     }
   }
@@ -77,7 +81,8 @@ class DB {
       $result = self::$dbo->lastInsertId();
       return $result;
     } catch (PDOException $ex) {
-      echo "<br><b>ERROR EN LA QUERY PREPARADA</b> $query<br>";
+      setcookie("errorMessage", "Error en la query $query.", 0, "/");
+      header("Location:/error.php");
       return null;
     }
   }

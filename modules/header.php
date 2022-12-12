@@ -37,9 +37,8 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
 
     addToNav('Inicio', '/index.php');
 
-    // POR FAVOR NO TOCAR ESTO POR LO QUE MAS QUIERAS NO QUIERO MAS PUTOS ESPACIOS EN EL NAV
     if ($userObj) {
-    ?><div class="submenu"><?php addToNav("Eventos <i class='fa fa-caret-down'></i>", "#") ?><div class="submenu-content">
+    ?><div class="submenu"><?php addToNav("Eventos <i class='fa fa-caret-down'></i>", "/view/events.php") ?><div class="submenu-content">
           <?php
           $eventLinks = array(
             "Mis eventos" => "/view/events.php?participant=true",
@@ -51,10 +50,9 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
           foreach ($eventLinks as $name => $path) {
             addToNav($name, $path);
           }
-          ?>
-        </div>
-      </div>
-      <div class="submenu"><?php addToNav("Perfil <i class='fa fa-caret-down'></i>", "#") ?>
+
+          // Dejar todo esta linea junta para quitar espacio nav
+          ?></div></div><div class="submenu"><?php addToNav("Perfil <i class='fa fa-caret-down'></i>", "/view/profile.php") ?>
         <div class="submenu-content">
           <?php
           $loginLinks = array(

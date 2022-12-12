@@ -50,9 +50,10 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
           foreach ($eventLinks as $name => $path) {
             addToNav($name, $path);
           }
+          ?>
 
-          // Dejar todo esta linea junta para quitar espacio nav
-          ?></div></div><div class="submenu"><?php addToNav("Perfil <i class='fa fa-caret-down'></i>", "/view/profile.php") ?>
+          <!-- Dejar todo esta linea junta para quitar espacio nav -->
+        </div></div><div class="submenu"><?php addToNav("Perfil <i class='fa fa-caret-down'></i>", "/view/profile.php") ?>
         <div class="submenu-content">
           <?php
           $loginLinks = array(
@@ -64,13 +65,13 @@ $userObj = $sessionUser !== "Anonimo" ? fetchUser($sessionUser) : null;
           foreach ($loginLinks as $name => $path) {
             addToNav($name, $path);
           }
-          ?></div>
+          ?>
+        </div>
       </div>
     <?php
     } else {
       addToNav('Login', '/login.php');
     }
-    // echo $_SERVER['SCRIPT_NAME'];
     ?>
   </nav>
 </header>

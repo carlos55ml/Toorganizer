@@ -1,7 +1,7 @@
 <?php
 include_once __DIR__ . '/DB.php';
 include_once __DIR__ . '/image.php';
-include_once __DIR__ . './../app/utils.php';
+include_once __DIR__ . '../utils.php';
 
 enum State {
   case setup; // El evento esta siendo configurado.

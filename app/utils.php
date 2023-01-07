@@ -32,3 +32,5 @@ function xss_clean($data) {
   // we are done...
   return $data;
 }
+
+?>

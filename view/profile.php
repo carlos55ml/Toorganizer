@@ -46,6 +46,9 @@
         <label for="usernameField" class="col-30">Nombre de usuario: </label>
         <input type="text" name="usernameField" id="usernameField" class="col-60" disabled value="<?php echo $targetUserObj['username']; ?>">
         <br>
+        <label for="idField" class="col-30">Id de usuario: </label>
+        <input type="text" name="idField" id="idField" class="col-60" disabled value="<?php echo $targetUserObj['user_id']; ?>">
+        <br>
         <label for="imgUrl" class="col-30">URL de avatar: </label>
         <input type="text" name="imgUrl" id="imgUrl" class="col-60" disabled value="<?php echo $targetUserObj['avatar_url']; ?>">
         <br>

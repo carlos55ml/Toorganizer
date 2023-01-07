@@ -14,3 +14,28 @@
 .game-name {
   font-weight: bold;
 }
+
+div.event-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
+}
+
+.event-info div {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 15px;
+  margin-top: 10px;
+}
+
+li > button {
+  display: ruby-base-container;
+  padding: 1px;
+  background-color: coral;
+}
+li > button:hover {
+  display: ruby-base-container;
+  padding: 1px;
+  background-color: red;
+}
+

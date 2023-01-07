@@ -32,6 +32,27 @@ enum State {
 }
 
 /**
+ * POST
+ */
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if(isset($_POST['action'])) {
+    switch ($_POST['action']) {
+      case 'deleteAdminFromEvent':
+        removeAdminFromEvent($_POST['targetId'], $_POST['eventId']);
+        break;
+      case 'anadirAdmin':
+        if (isset($_POST['anadirInput'])){
+          addOrganizerToEvent($_POST['eventId'], $_POST['anadirInput']);
+        } else {
+          header("Location:/view/event.php?eId=".$_POST['eventId']);
+        }
+        break;
+    }
+  }
+}
+
+/**
  * DEVUELVE EVENTOS
  */
 
@@ -114,6 +135,19 @@ function fetchEventAdmins($eventId) {
 }
 
 /**
+ * Devuelve todos los usuarios que no son admin de un evento
+ */
+function fetchNonAdmins($eventId) {
+  $queryString = 
+  "SELECT DISTINCT u.* FROM users u, event_organizers eo, events e
+  WHERE u.user_id NOT IN (
+    SELECT user_id FROM event_organizers WHERE event_id=?)";
+  $queryValues = array($eventId);
+  return DB::preparedQuery($queryString, $queryValues);
+}
+
+
+/**
  * GESTION DE USUARIOS CON EVENTOS
  */
 
@@ -126,6 +160,19 @@ function addOrganizerToEvent($event, $organizer) {
   $queryString = 'INSERT INTO event_organizers(event_id, user_id) VALUES (?, ?)';
   $queryValues = array($event, $organizer);
   DB::preparedQuery($queryString, $queryValues);
+  header("Location:/view/event.php?eId=$event");
+}
+
+/**
+ * Elimina un organizador de un evento.
+ */
+function removeAdminFromEvent($adminId, $eventId) {
+  $queryString = 
+  "DELETE FROM event_organizers
+  WHERE event_id=?
+  AND user_id=?";
+  $queryValues = array($eventId, $adminId);
+  echo DB::preparedQuery($queryString, $queryValues);
 }
 
 function addParticipantToEvent($eventId, $participantId) {
@@ -134,6 +181,38 @@ function addParticipantToEvent($eventId, $participantId) {
   (?, ?)";
   $queryValues = array($participantId, $eventId);
   DB::preparedQuery($queryString, $queryValues);
+}
+
+/**
+ * Devuelve si un usuario es participante de un evento o no
+ * @param int $eventId La id del evento a comprobar
+ * @param int $userId La id del usuario a comprobar
+ * @return bool True si es Participante, False si no.
+ */
+function isEventParticipant($eventId, $userId) {
+  $queryString = 
+  "SELECT * FROM event_participants ep 
+  WHERE user_id=?
+  AND event_id=?";
+  $queryValues = array($userId, $eventId);
+  $result = DB::preparedQuery($queryString, $queryValues);
+  return $result?true:false;
+}
+
+/**
+ * Devuelve si un usuario es organizdor de un evento o no
+ * @param int $eventId La id del evento a comprobar
+ * @param int $userId La id del usuario a comprobar
+ * @return bool True si es Organizador, False si no.
+ */
+function isEventAdmin($eventId, $userId) {
+  $queryString = 
+  "SELECT * FROM event_organizers eo 
+  WHERE user_id=?
+  AND event_id=?";
+  $queryValues = array($userId, $eventId);
+  $result = DB::preparedQuery($queryString, $queryValues);
+  return $result?true:false;
 }
 
 

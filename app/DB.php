@@ -41,7 +41,7 @@ class DB {
       $result = self::$dbo->query($query);
       return $result;
     } catch (PDOException $ex) {
-      setcookie("errorMessage", "Error en la query $query.", 0, "/");
+      setcookie("errorMessage", "Error en la query $query ====>>> $ex.", 0, "/");
       header("Location:/error.php");
       return null;
     }
@@ -61,7 +61,7 @@ class DB {
       $result = $stmt->fetchAll();
       return $result;
     } catch (PDOException $ex) {
-      setcookie("errorMessage", "Error en la query $query.", 0, "/");
+      setcookie("errorMessage", "Error en la query $query ====>>> $ex.", 0, "/");
       header("Location:/error.php");
       return null;
     }
@@ -81,7 +81,7 @@ class DB {
       $result = self::$dbo->lastInsertId();
       return $result;
     } catch (PDOException $ex) {
-      setcookie("errorMessage", "Error en la query $query.", 0, "/");
+      setcookie("errorMessage", "Error en la query $query ====>>> $ex.", 0, "/");
       header("Location:/error.php");
       return null;
     }

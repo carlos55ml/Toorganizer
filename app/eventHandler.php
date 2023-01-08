@@ -48,6 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           header("Location:/view/event.php?eId=" . $_POST['eventId']);
         }
         break;
+      case 'changeState':
+        changeEventState($_POST['eventId'], $_POST['newState']);
+        break;
     }
   }
 }
@@ -240,6 +243,22 @@ function createEvent(string $name, string $game, string $logoUrl, State $state =
     setcookie("errorMessage", "Error al crear el evento.", 0, "/");
     header("Location:/error.php");
   }
+}
+
+/**
+ * Cambia el estado de un evento
+ * @param int $eventId La id del evento a cambair
+ * @param State $state El estado a poner en el evento.
+ */
+function changeEventState($eventId, $state) {
+
+  $queryString = 
+  "UPDATE events
+  SET state=?
+  WHERE event_id=?";
+  $queryValues = array($state, $eventId);
+  DB::preparedQuery($queryString, $queryValues);
+  header("Location:/view/event.php?eId=$eventId");
 }
 
 

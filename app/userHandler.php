@@ -62,7 +62,7 @@ function fetchUserId(int $id) {
  */
 function fetchAllUsers() {
   $query = 'SELECT * FROM users';
-  $result = DB::query($query);
+  $result = DB::preparedQuery($query, array());
   return empty($result) ? null : $result;
 }
 

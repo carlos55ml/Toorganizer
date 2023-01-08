@@ -29,6 +29,16 @@ enum State {
       State::canceled => "canceled",
     };
   }
+
+  function canJoin() {
+    return match ($this) {
+      State::setup => false,
+      State::pending => true,
+      State::running => false,
+      State::finished => false,
+      State::canceled => false,
+    };
+  }
 }
 
 /**
@@ -50,6 +60,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         break;
       case 'changeState':
         changeEventState($_POST['eventId'], $_POST['newState']);
+        break;
+      case 'addParticipant':
+        addParticipantToEvent($_POST['eventId'], $_POST['userId']);
+        break;
+      case 'leaveEvent':
+        removeParticipantFromEvent($_POST['eventId'], $_POST['userId']);
         break;
     }
   }
@@ -178,12 +194,28 @@ function removeAdminFromEvent($adminId, $eventId) {
   echo DB::preparedQuery($queryString, $queryValues);
 }
 
+/**
+ * Anade un participante a un evento
+ * @param int $eventId El evento donde anadirlo
+ * @param int $participantId La id del usuario a anadir como participante
+ */
 function addParticipantToEvent($eventId, $participantId) {
   $queryString =
     "INSERT INTO event_participants(user_id, event_id) VALUES
   (?, ?)";
   $queryValues = array($participantId, $eventId);
   DB::preparedQuery($queryString, $queryValues);
+  header("Location:/view/event.php?eId=$eventId");
+}
+
+function removeParticipantFromEvent($eventId, $participantId) {
+  $queryString =
+  "DELETE FROM event_participants
+  WHERE event_id=?
+  AND user_id=?";
+  $queryValues = array($eventId, $participantId);
+  DB::preparedQuery($queryString, $queryValues);
+  header("Location:/view/event.php?eId=$eventId");
 }
 
 /**

@@ -52,6 +52,13 @@ if ($thisEvent) {
       $creator = fetchUserId($thisEvent['owner']);
       $isParticipant = isEventParticipant($thisEvent[0], $userObj[0]);
       $isAdmin = isEventAdmin($thisEvent[0], $userObj[0]);
+      $canJoin;
+      foreach (State::cases() as $key => $case) {
+        if ($case->key() == $thisEvent['state']) {
+          $canJoin = $case->canJoin();
+          break;
+        }
+      }
     ?>
       <!-- \/ TODO EL CONTENIDO DEL EVENTO DENTRO DE ESTOS CORCHETES (control de que evento exista) \/ -->
       <div class="event-header center">
@@ -76,6 +83,22 @@ if ($thisEvent) {
             <?php } ?>
           </select>
           <input type="submit" value="Cambiar estado">
+        </form>
+      <?php } ?>
+      <?php if($canJoin and !$isParticipant) { ?>
+        <form action="./../app/eventHandler.php" method="post">
+          <input type="hidden" name="action" value="addParticipant">
+          <input type="hidden" name="eventId" value="<?php echo $thisEvent[0] ?>">
+          <input type="hidden" name="userId" value="<?php echo $userObj[0] ?>">
+          <input type="submit" value="Quiero participar!" class="join-event">
+        </form>
+      <?php }
+      if ($isParticipant){ ?>
+      <form action="./../app/eventHandler.php" method="post">
+          <input type="hidden" name="action" value="leaveEvent">
+          <input type="hidden" name="eventId" value="<?php echo $thisEvent[0] ?>">
+          <input type="hidden" name="userId" value="<?php echo $userObj[0] ?>">
+          <input type="submit" value="Dejar evento" class="leave-event">
         </form>
       <?php } ?>
       </div>
@@ -107,14 +130,24 @@ if ($thisEvent) {
                 foreach ($users as $k => $v) { ?>
                   <option value="<?php echo $v[0] ?>"><?php echo $v[0] . " - " . $v['username'] ?></option>
                 <?php } ?>
-
               </select>
               <input type="submit" value="Añadir">
             </form>
           <?php } ?>
+          
         </div>
         <div class="event-participants">
           <b>Lista participantes</b>
+          <?php $participants = fetchEventParticipants($thisEvent[0]); ?>
+          <ul>
+            <?php foreach ($participants as $key => $participant) { 
+                    if($isAdmin){ ?>
+                    <li> <?php echo $participant[0]. " - ".$participant['username'] ?> <button class="deleteParticipant" name="deleteParticipant" value="<?php echo $participant[0] ?>">Eliminar</button> </li>
+              <?php } else { ?>
+                <li> <?php echo $participant[0]. " - ".$participant['username'] ?> </li>
+            <?php }
+            } ?>
+          </ul>
         </div>
       </div>
 
@@ -130,6 +163,21 @@ if ($thisEvent) {
                 'action': 'deleteAdminFromEvent',
                 'eventId': <?php echo $thisEvent[0] ?>,
                 'targetId': target
+              },
+              success: function(r) {
+                location.reload()
+              }
+            })
+          })
+          $('.deleteParticipant').click(function(){
+            var target = $(this).val()
+            $.ajax({
+              type: "POST",
+              url: './../app/eventHandler.php',
+              data: {
+                'action': 'leaveEvent',
+                'eventId': <?php echo $thisEvent[0] ?>,
+                'userId': target
               },
               success: function(r) {
                 location.reload()

@@ -11,7 +11,7 @@ enum State {
   case canceled; // El evento ha sido cancelado.
 
   function value() {
-    return match($this) {
+    return match ($this) {
       State::setup => "En preparacion",
       State::pending => "Pendiente",
       State::running => "En curso",
@@ -21,7 +21,7 @@ enum State {
   }
 
   function key() {
-    return match($this) {
+    return match ($this) {
       State::setup => "setup",
       State::pending => "pending",
       State::running => "running",
@@ -35,17 +35,17 @@ enum State {
  * POST
  */
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if(isset($_POST['action'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (isset($_POST['action'])) {
     switch ($_POST['action']) {
       case 'deleteAdminFromEvent':
         removeAdminFromEvent($_POST['targetId'], $_POST['eventId']);
         break;
       case 'anadirAdmin':
-        if (isset($_POST['anadirInput'])){
+        if (isset($_POST['anadirInput'])) {
           addOrganizerToEvent($_POST['eventId'], $_POST['anadirInput']);
         } else {
-          header("Location:/view/event.php?eId=".$_POST['eventId']);
+          header("Location:/view/event.php?eId=" . $_POST['eventId']);
         }
         break;
     }
@@ -138,10 +138,10 @@ function fetchEventAdmins($eventId) {
  * Devuelve todos los usuarios que no son admin de un evento
  */
 function fetchNonAdmins($eventId) {
-  $queryString = 
-  "SELECT DISTINCT u.* FROM users u, event_organizers eo, events e
-  WHERE u.user_id NOT IN (
-    SELECT user_id FROM event_organizers WHERE event_id=?)";
+  $queryString =
+    "SELECT DISTINCT u.* FROM users u, event_organizers eo, events e
+  WHERE u.user_id NOT IN (SELECT user_id FROM event_organizers 
+  WHERE event_id=?)";
   $queryValues = array($eventId);
   return DB::preparedQuery($queryString, $queryValues);
 }
@@ -167,8 +167,8 @@ function addOrganizerToEvent($event, $organizer) {
  * Elimina un organizador de un evento.
  */
 function removeAdminFromEvent($adminId, $eventId) {
-  $queryString = 
-  "DELETE FROM event_organizers
+  $queryString =
+    "DELETE FROM event_organizers
   WHERE event_id=?
   AND user_id=?";
   $queryValues = array($eventId, $adminId);
@@ -176,8 +176,8 @@ function removeAdminFromEvent($adminId, $eventId) {
 }
 
 function addParticipantToEvent($eventId, $participantId) {
-  $queryString = 
-  "INSERT INTO event_participants(user_id, event_id) VALUES
+  $queryString =
+    "INSERT INTO event_participants(user_id, event_id) VALUES
   (?, ?)";
   $queryValues = array($participantId, $eventId);
   DB::preparedQuery($queryString, $queryValues);
@@ -190,13 +190,13 @@ function addParticipantToEvent($eventId, $participantId) {
  * @return bool True si es Participante, False si no.
  */
 function isEventParticipant($eventId, $userId) {
-  $queryString = 
-  "SELECT * FROM event_participants ep 
+  $queryString =
+    "SELECT * FROM event_participants ep 
   WHERE user_id=?
   AND event_id=?";
   $queryValues = array($userId, $eventId);
   $result = DB::preparedQuery($queryString, $queryValues);
-  return $result?true:false;
+  return $result ? true : false;
 }
 
 /**
@@ -206,13 +206,13 @@ function isEventParticipant($eventId, $userId) {
  * @return bool True si es Organizador, False si no.
  */
 function isEventAdmin($eventId, $userId) {
-  $queryString = 
-  "SELECT * FROM event_organizers eo 
+  $queryString =
+    "SELECT * FROM event_organizers eo 
   WHERE user_id=?
   AND event_id=?";
   $queryValues = array($userId, $eventId);
   $result = DB::preparedQuery($queryString, $queryValues);
-  return $result?true:false;
+  return $result ? true : false;
 }
 
 

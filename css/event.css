@@ -28,14 +28,8 @@ div.event-info {
   margin-top: 10px;
 }
 
-li > button {
-  display: ruby-base-container;
-  padding: 1px;
-  background-color: coral;
-}
-li > button:hover {
-  display: ruby-base-container;
-  padding: 1px;
+li > button[name="deleteAdmin"]:hover {
+  color: white;
   background-color: red;
 }
 

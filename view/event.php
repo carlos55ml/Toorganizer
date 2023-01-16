@@ -65,15 +65,19 @@ if ($thisEvent) {
         <span class="event-name"><?php echo $thisEvent['name'] ?></span> <br><br>
         Juego: <span class="game-name"><?php echo $thisEvent['game'] ?></span> <br>
         Creador: <a href="./profile.php?id=<?php echo $creator[0] ?>" class="link"><span class="creator-name"><?php echo $creator['username'] ?></span></a>
-        Estado: <span class="event-state"><b><?php
-                                          foreach (State::cases() as $case) {
-                                            if ($case->key() == $thisEvent['state']) {
-                                              echo $case->value();
-                                              break;
-                                            }
-                                          }
-                                          ?></b></span>
-      <?php if ($isAdmin){ ?>
+        Estado: <span class="event-state">
+          <b>
+            <?php
+            foreach (State::cases() as $case) {
+              if ($case->key() == $thisEvent['state']) {
+                echo $case->value();
+                break;
+              }
+            }
+            ?>
+          </b>
+        </span>
+      <?php if ($isAdmin) { ?>
         <form action="./../app/eventHandler.php" method="post">
           <input type="hidden" name="eventId" value="<?php echo $thisEvent[0] ?>">
           <input type="hidden" name="action" value="changeState">
@@ -84,8 +88,8 @@ if ($thisEvent) {
           </select>
           <input type="submit" value="Cambiar estado">
         </form>
-      <?php } ?>
-      <?php if($canJoin and !$isParticipant) { ?>
+      <?php }
+      if ($canJoin and !$isParticipant) { ?>
         <form action="./../app/eventHandler.php" method="post">
           <input type="hidden" name="action" value="addParticipant">
           <input type="hidden" name="eventId" value="<?php echo $thisEvent[0] ?>">
@@ -93,7 +97,7 @@ if ($thisEvent) {
           <input type="submit" value="Quiero participar!" class="join-event">
         </form>
       <?php }
-      if ($isParticipant){ ?>
+      if ($isParticipant) { ?>
       <form action="./../app/eventHandler.php" method="post">
           <input type="hidden" name="action" value="leaveEvent">
           <input type="hidden" name="eventId" value="<?php echo $thisEvent[0] ?>">
@@ -134,7 +138,6 @@ if ($thisEvent) {
               <input type="submit" value="Añadir">
             </form>
           <?php } ?>
-          
         </div>
         <div class="event-participants">
           <b>Lista participantes</b>

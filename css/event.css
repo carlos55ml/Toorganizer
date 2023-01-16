@@ -28,7 +28,7 @@ div.event-info {
   margin-top: 10px;
 }
 
-li > button[name="deleteAdmin"]:hover {
+li > button:hover {
   color: white;
   background-color: red;
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Sube imagen a imgur
- * @param file $img los datos de la imagen a subir
+ * @param array $img los datos de la imagen a subir
  * @return mixed Link a la imagen, o null si error.
  */
 function uploadToImgur($img) {
